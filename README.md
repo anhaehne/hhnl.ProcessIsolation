@@ -1,6 +1,8 @@
 # hhnl.ProcessIsolation
 A .net library to start isolated processes.
 
+![Nuget](https://img.shields.io/nuget/v/hhnl.ProcessIsolation?label=hhnl.ProcessIsolation)
+
 Eventhough this is a .net standard project, only windows is currently supported.
 Processes are run inside an appcontainer which restricts network, file and windows access.
 
