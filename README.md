@@ -27,7 +27,7 @@ using hhnl.ProcessIsolation.Windows;
 
 // Allows read and write access to the desktop
 var desktopPath = Environment.ExpandEnvironmentVariables("%userprofile%\\Desktop");
-var desktopFileAccess = new FileAccess(desktopPath, 
+var desktopFileAccess = new FileAccess(desktopPath, FileAccess.Right.Read | FileAccess.Right.Write);
 
 isolator.StartIsolatedProcess("MyIsolatedProcess", "myapp.exe", fileAccess: new[] { desktopFileAccess });
 ```
