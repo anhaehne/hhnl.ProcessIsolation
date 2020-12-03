@@ -14,6 +14,8 @@ See https://docs.microsoft.com/en-us/windows/win32/secauthz/appcontainer-isolati
 
 Allow network access:
 ``` csharp
+using hhnl.ProcessIsolation.Windows;
+
 // Allows internet and local network access
 isolator.StartIsolatedProcess("MyIsolatedProcess", "myapp.exe", networkPermissions: NetworkPermissions.Internet | NetworkPermissions.LocalNetwork);
 ```
