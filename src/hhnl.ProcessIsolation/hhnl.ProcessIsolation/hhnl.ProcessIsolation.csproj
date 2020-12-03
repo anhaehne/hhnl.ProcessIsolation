@@ -10,6 +10,7 @@
     <IsPackable>true</IsPackable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/anhaehne/hhnl.ProcessIsolation</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
