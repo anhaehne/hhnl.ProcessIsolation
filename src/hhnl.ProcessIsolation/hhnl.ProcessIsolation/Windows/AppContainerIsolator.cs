@@ -100,7 +100,7 @@ namespace hhnl.ProcessIsolation.Windows
             if (attachToCurrentProcess)
                 _childProcessCascadeCloseJob.Value.AssignProcess(process.Process);
 
-            return new IsolatedWin32Process(process);
+            return new IsolatedWin32Process(process, container);
         }
 
         private static void AllowFileAccess(AppContainerProfile container, string folder, FileAccessRights accessRights)
