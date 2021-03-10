@@ -25,6 +25,13 @@ namespace hhnl.ProcessIsolation
         /// <returns>
         /// The process object. Needs to be disposed.
         /// </returns>
+        /// <param name="makeApplicationDirectoryReadable">
+        /// By default the folder containing the executable will be made available to the process to allow loading dependencies.
+        /// Set this to false to suppress this behaviour.
+        /// </param>
+        /// <param name="workingDirectory">
+        /// The working directory of the process.
+        /// </param>
         /// <exception cref="ArgumentException">$"Couldn't resolve directory for '{path}'.</exception>
         IIsolatedProcess StartIsolatedProcess(
             string isolationIdentifier,
@@ -32,6 +39,8 @@ namespace hhnl.ProcessIsolation
             string[]? commandLineArguments = null,
             NetworkPermissions networkPermissions = NetworkPermissions.None,
             bool attachToCurrentProcess = true,
-            IEnumerable<FileAccess>? fileAccess = null);
+            IEnumerable<FileAccess>? fileAccess = null,
+            bool makeApplicationDirectoryReadable = true,
+            string? workingDirectory = null);
     }
 }

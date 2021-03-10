@@ -38,7 +38,14 @@ namespace hhnl.ProcessIsolation.Windows
         /// If set to <c>true</c> the started process will be terminated when the current
         /// process exits.
         /// </param>
-        /// <param name="fileAccessleAccess">The extended file access. Allows for custom file and folder access rights.</param>
+        /// <param name="fileAccess">The extended file access. Allows for custom file and folder access rights.</param>
+        /// <param name="makeApplicationDirectoryReadable">
+        /// By default the folder containing the executable will be made available to the process to allow loading dependencies.
+        /// Set this to false to suppress this behaviour.
+        /// </param>
+        /// <param name="workingDirectory">
+        /// The working directory of the process.
+        /// </param>
         /// <returns>
         /// The process object. Needs to be disposed.
         /// </returns>
@@ -49,7 +56,9 @@ namespace hhnl.ProcessIsolation.Windows
             string[]? commandLineArguments = null,
             NetworkPermissions networkPermissions = NetworkPermissions.None,
             bool attachToCurrentProcess = true,
-            IEnumerable<FileAccess>? fileAccess = null)
+            IEnumerable<FileAccess>? fileAccess = null,
+            bool makeApplicationDirectoryReadable = true,
+            string? workingDirectory = null)
         {
             string applicationName = Path.GetFileNameWithoutExtension(path);
 
@@ -64,13 +73,17 @@ namespace hhnl.ProcessIsolation.Windows
                 CommandLine = commandLineArguments is not null ? string.Join(" ", commandLineArguments) : string.Empty,
                 ChildProcessMitigations = ChildProcessMitigationFlags.Restricted,
                 AppContainerSid = container.Sid,
-                TerminateOnDispose = true
+                TerminateOnDispose = true,
+                CurrentDirectory = workingDirectory is null ? null : Path.GetFullPath(workingDirectory),
             };
 
             // Allow the process to access it's own files.
-            var appDirectory = Path.GetDirectoryName(path) ??
-                               throw new ArgumentException($"Couldn't resolve directory for '{path}'.");
-            AllowFileAccess(container, appDirectory, FileAccessRights.GenericRead);
+            if (makeApplicationDirectoryReadable)
+            {
+                var appDirectory = Path.GetDirectoryName(path) ??
+                                   throw new ArgumentException($"Couldn't resolve directory for '{path}'.");
+                AllowFileAccess(container, appDirectory, FileAccessRights.GenericRead);
+            }
 
             // Apply user folder and file permissions
             if (fileAccess is not null)

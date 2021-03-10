@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Andre Hähnel</Authors>
     <PackageTags>Process isolation;AppContainer</PackageTags>
     <IsPackable>true</IsPackable>
