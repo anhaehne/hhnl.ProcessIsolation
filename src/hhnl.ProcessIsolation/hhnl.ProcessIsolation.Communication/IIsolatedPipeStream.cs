@@ -9,8 +9,8 @@ namespace hhnl.ProcessIsolation.Communication
     {
         public PipeStream Stream { get; }
 
-        public Task StartAsync(CancellationToken token);
+        public Task StartAsync(CancellationToken token = default);
         
-        public Task StopAsync(CancellationToken token);
+        public Task StopAsync();
     }
 }

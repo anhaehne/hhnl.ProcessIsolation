@@ -37,12 +37,12 @@ namespace hhnl.ProcessIsolation.Communication
 
         public PipeStream Stream => _serverStream;
 
-        public Task StartAsync(CancellationToken token)
+        public Task StartAsync(CancellationToken token = default)
         {
             return WaitForConnectionAsync(token);
         }
 
-        public Task StopAsync(CancellationToken token)
+        public Task StopAsync()
         {
             Disconnect();
             return Task.CompletedTask;

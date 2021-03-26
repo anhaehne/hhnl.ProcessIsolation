@@ -117,7 +117,7 @@ namespace hhnl.ProcessIsolation.Communication
                 }
             }
             
-            await _stream.StopAsync(cancellationToken);
+            await _stream.StopAsync();
             
             _cts?.Dispose();
             _cts = null;
